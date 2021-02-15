@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sentinel
+spec:
+  serviceName: sentinel
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sentinel
+  template:
+    metadata:
+      labels:
+        app: sentinel
+    spec:
+      containers:
+        - name: sentinel
+          image: nickadam/redis-ha:1
+          env:
+          - name: REDIS_NAME
+            value: "redis"
+          - name: REDIS_PORT
+            value: "6379"
+          - name: SERVICE_NAME
+            value: "sentinel"
+          - name: SENTINEL_PORT
+            value: "26379"
+          - name: REDIS_SENTINEL_SERVICE_NAME
+            value: "redis-sentinel-service"
+          - name: PASSWORD
+            value: "badpassword"
+          - name: INSTANCE_NAME
+            value: "mycluster"
+          - name: QUORUM
+            value: "2"
+          command:
+            - 'tini'
+            - 'docker-entrypoint.sh'
+            - 'redis-sentinel'
+          ports:
+            - containerPort: 26379
+              name: sentinel

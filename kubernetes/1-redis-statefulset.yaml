@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  serviceName: redis
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: nickadam/redis-ha:1
+          env:
+          - name: REDIS_NAME
+            value: "redis"
+          - name: REDIS_PORT
+            value: "6379"
+          - name: PASSWORD
+            value: "badpassword"
+          ports:
+            - containerPort: 6379
+              name: redis

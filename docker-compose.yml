@@ -1,0 +1,54 @@
+version: '3.9'
+services:
+  redis:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nickadam/redis-ha:1
+    environment:
+      REDIS_NAME: redis
+      REDIS_PORT: 6379
+      PASSWORD: badpassword
+      # password can come from a secret file instead
+      #PASSWORD_FILE: /run/secrets/redis_password
+    #volumes:
+    #  - type: volume
+    #    source: rdb
+    #    target: /data
+    #secrets:
+    #  - redis_password
+    deploy:
+      mode: replicated
+      replicas: 2
+      endpoint_mode: dnsrr
+      placement:
+        max_replicas_per_node: 2
+        # make sure replicas are spread across systems
+        #max_replicas_per_node: 1
+  sentinel:
+    image: nickadam/redis-ha:1
+    command: redis-sentinel
+    environment:
+      REDIS_NAME: redis
+      REDIS_PORT: 6379
+      SENTINEL_NAME: sentinel
+      SENTINEL_PORT: 26379
+      PASSWORD: badpassword
+      #PASSWORD_FILE: /run/secrets/redis_password
+      INSTANCE_NAME: mycluster
+      QUORUM: 2
+    #secrets:
+    #  - redis_password
+    deploy:
+      mode: replicated
+      replicas: 3
+      endpoint_mode: dnsrr
+      placement:
+        max_replicas_per_node: 3
+        # make sure replicas are spread across systems
+        #max_replicas_per_node: 1
+#volumes:
+#  rdb:
+#secrets:
+#  redis_password:
+#    external: true
