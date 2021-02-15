@@ -13,9 +13,9 @@ will attempt to connect to the other instances and identify if they have the
 role master. If no primary (master) can be found, the host with the lowest
 sorted IP address assumes the role.
 
-The redis-sentinel instaces are slightly more simple they simply search for the
-primary redis server instance and connect to it. Sentinels will learn of each
-other and all connected replicas and handle failovers.
+The redis-sentinel instaces just search for the primary redis server instance
+and connect to it. Sentinels will learn of each other and all connected replicas
+and handle failovers.
 
 Your application must query the sentinel service to identify which redis server
 is the primary server for writes. Any redis server can be used for reads.
