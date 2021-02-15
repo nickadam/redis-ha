@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client
+  labels:
+    app: client
+spec:
+  containers:
+    - name: client
+      image: nickadam/redis-ha:1
+      command:
+        - 'tini'
+        - 'sleep'
+        - 'infinity'
