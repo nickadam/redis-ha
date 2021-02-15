@@ -26,8 +26,6 @@ spec:
             value: "sentinel"
           - name: SENTINEL_PORT
             value: "26379"
-          - name: REDIS_SENTINEL_SERVICE_NAME
-            value: "redis-sentinel-service"
           - name: PASSWORD
             value: "badpassword"
           - name: INSTANCE_NAME
