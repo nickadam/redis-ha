@@ -22,14 +22,14 @@ spec:
             value: "redis"
           - name: REDIS_PORT
             value: "6379"
-          - name: SERVICE_NAME
+          - name: SENTINEL_NAME
             value: "sentinel"
           - name: SENTINEL_PORT
             value: "26379"
           - name: PASSWORD
             value: "badpassword"
           - name: INSTANCE_NAME
-            value: "mycluster"
+            value: "myinstance"
           - name: QUORUM
             value: "2"
           command:

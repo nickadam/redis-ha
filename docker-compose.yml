@@ -35,7 +35,7 @@ services:
       SENTINEL_PORT: 26379
       PASSWORD: badpassword
       #PASSWORD_FILE: /run/secrets/redis_password
-      INSTANCE_NAME: mycluster
+      INSTANCE_NAME: myinstance
       QUORUM: 2
     #secrets:
     #  - redis_password
