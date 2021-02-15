@@ -11,6 +11,6 @@ COPY --from=curl /tini /usr/local/bin/
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["tini", "docker-entrypoint.sh"]
 
 CMD ["redis-server"]
