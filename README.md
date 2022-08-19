@@ -21,7 +21,7 @@ Your application must query the sentinel service to identify which redis server
 is the primary server for writes. Any redis server can be used for reads.
 
 ```
-redis-cli -h sentinel -p 26397 sentinel get-master-addr-by-name myinstance
+redis-cli -h sentinel -p 26379 sentinel get-master-addr-by-name myinstance
 ```
 
 ## Docker swarm
